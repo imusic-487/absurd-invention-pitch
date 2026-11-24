@@ -39,6 +39,10 @@ def main() -> None:
         )
     if text.count(".") != 1 or not text.endswith("."):
         raise RuntimeError("entry must be exactly one sentence")
+    if "!" in text or "?" in text:
+        raise RuntimeError("entry must end with one period, not ! or ?")
+    if "\n" in text or "\r" in text:
+        raise RuntimeError("entry must be a single line")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_FILE.write_bytes(source)
